@@ -5,6 +5,7 @@ namespace Project\Module\Reader;
 use Project\Configuration;
 use Project\Module\Database\Database;
 use Project\Module\GenericValueObject\Datetime;
+use Project\Module\GenericValueObject\DatetimeInterface;
 
 
 /**
@@ -13,6 +14,9 @@ use Project\Module\GenericValueObject\Datetime;
  */
 class ReaderService
 {
+    /** @var string INPUT_FILE_NAME */
+    protected const INPUT_FILE_NAME = '192.168.1.8.txt';
+
     /** @var RunRepository $runRepository */
     protected $runRepository;
 
@@ -27,7 +31,9 @@ class ReaderService
     }
 
     /**
-     * @param array $transponderTranslation
+     * @param array         $transponderTranslation
+     *
+     * @param Configuration $configuration
      *
      * @return array
      */
@@ -35,16 +41,18 @@ class ReaderService
     {
         $runArray = [];
         $runFactory = new RunFactory();
-        $file = file('192.168.1.8.txt');
+        $file = file(self::INPUT_FILE_NAME);
         $count = \count($file);
+        /** @var DatetimeInterface $endTime */
         $endTime = Datetime::fromValue($configuration->getEntryByName('endTime'));
+        /** @var DatetimeInterface $startTime */
         $startTime = Datetime::fromValue($configuration->getEntryByName('startingTime'));
 
         for ($i = 0; $i < $count; $i++) {
             $fileData = explode('	', $file[$i]);
 
             $run = $runFactory->createRunFromFileData($transponderTranslation[$fileData[0]], $fileData[1]);
-            if ($run->getTimestamp()->getDifference($startTime) > 0 && $run->getTimestamp()->getDifference($endTime) < 0) {
+            if ($run !== null && $run->getTimestamp()->getDifference($startTime) > 0 && $run->getTimestamp()->getDifference($endTime) < 0) {
                 $runArray[] = $run;
             }
         }
