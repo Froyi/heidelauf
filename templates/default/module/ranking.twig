@@ -1,0 +1,35 @@
+<div class="ranking-list">
+    {% if teams %}
+        {% for position, team in teams %}
+            <div class="flex">
+                <div class="ranking-position">
+                    {{ position }}.
+                </div>
+                <div class="ranking-category">
+                    {% if team.isExtreme is same as (true) %}E{% else %}J{% endif %}
+                </div>
+                <div class="ranking-name">
+                    {{ team.getTeamName }}
+                </div>
+                <div class="ranking-rounds">
+                    {% if team.getRounds is same as (0) %}
+                        Gestartet
+                    {% else %}
+                        {{ team.getRounds }} {% if team.getRounds is same as (1) %}Runde{% else %}Runden{% endif %}
+                    {% endif %}
+                </div>
+                <div class="ranking-last-round">
+                    {% if team.getLastRound %}
+                        {{ team.getLastRound | convertDiff }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="ranking-legend">
+            <p>E - Extrem Quartett | J - Jedermann</p>
+            <p>Die Zeit am Ende ist die zuletzt gelaufene Rundenzeit.</p>
+        </div>
+    {% endif %}
+</div>

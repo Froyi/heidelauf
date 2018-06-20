@@ -1,0 +1,21 @@
+{% if team %}
+    <div class="edit-teams">
+        <h2>Team bearbeiten</h2>
+        <form action="{{ route('editTeamSubmit') }}" method="post">
+            <p>
+                <label for="teamName">TeamName: <input type="text" autofocus name="teamName"
+                                                       value="{{ team.getTeamName }}"></label></p>
+            <p>
+                <label for="transponderNumber">Transponder Nummer: <input type="number" name="transponderNumber"
+                                                                          value="{{ team.getTransponderNumber }}"></label>
+            </p>
+            <p><label for="extreme"><input type="checkbox" name="extreme"
+                                           {% if team.isExtreme is same as (true) %}checked{% endif %}> Ist Extrem
+                    Team</label></p>
+            <p class="hidden-fields">
+                <input type="hidden" name="teamId" value="{{ team.getTeamId }}">
+            </p>
+            <p><input type="submit" name="submit" value="Bearbeiten"></p>
+        </form>
+    </div>
+{% endif %}

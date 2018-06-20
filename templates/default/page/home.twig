@@ -1,0 +1,35 @@
+<div class="home-page js-home-page">
+    <div class="ranking-container">
+        <h1>Teamübersicht</h1>
+
+        <div class="ranking js-ranking">
+            {% include ('module/ranking.twig') %}
+        </div>
+    </div>
+
+    <div class="clock-container">
+        <div class="clock">
+            <h3>Zu laufende Restzeit</h3>
+            <div class="countdown js-countdown"></div>
+        </div>
+        <div class="donation">
+            <h3 class="donation-sum"><span class="js-donation-sum">{{ donationSum|number_format(0, ',', '.') }}</span>€</h3>
+            <h3>Spendensumme</h3>
+        </div>
+
+        <div class="sponsoring">
+            <img src="{{ templateDir }}/img/logo.jpg">
+            <img src="{{ templateDir }}/img/heidemudderer.jpg">
+            <img src="{{ templateDir }}/img/foerderverein.jpg">
+        </div>
+    </div>
+</div>
+
+{% if started is same as (false) %}
+<div class="till-start-container js-till-start-container">
+    <div class="clock">
+        <h3>Bis zum Start</h3>
+        <div class="js-till-start till-start"></div>
+    </div>
+</div>
+{% endif %}

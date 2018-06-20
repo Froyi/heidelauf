@@ -1,0 +1,163 @@
+.home-page {
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+    align-items: stretch;
+
+    h1 {
+        font-size: 3em;
+    }
+}
+.ranking-container {
+    margin-left: 50px;
+    width: 55%;
+
+    .flex {
+        justify-content: flex-start;
+        padding: 3px 0;
+
+        &:nth-of-type(2n) {
+            background-color: fade(@color-3, 20%);
+        }
+    }
+
+    .ranking {
+        width: 900px;
+        font-size: 1.8em;
+
+        .ranking-position {
+            width: 48px;
+            text-align: right;
+        }
+
+        .ranking-category {
+            width: 50px;
+            margin-left: 20px;
+        }
+
+        .ranking-name {
+            width: 600px;
+        }
+
+        .ranking-rounds {
+            text-align: right;
+            width: 190px;
+        }
+
+        .ranking-last-round {
+            width: 150px;
+            margin-left: 20px;
+            text-align: center;
+        }
+    }
+}
+
+.ranking-legend {
+    margin-top: 20px;
+
+    p {
+        font-size: 0.65em;
+        line-height: 30px;
+    }
+}
+
+.clock-container{
+    border-left: 1px solid black;
+    padding-left: 40px;
+    width: 43%;
+}
+
+.clock {
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    margin: 50px auto 0;
+    border: 2px solid black;
+    text-align: center;
+
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: .1;
+        z-index: -1;
+
+        background-image: url('@{basic-path}img/logo.jpg');
+        background-size:     contain;
+        background-repeat:   no-repeat;
+        background-position: center center;
+    }
+
+    h3 {
+        font-size: 3em;
+        margin-top: 185px;
+        font-weight: normal;
+    }
+
+    .countdown {
+        font-size: 8em;
+    }
+}
+
+.donation {
+    margin-top: 40px;
+
+    h3 {
+        text-align: center;
+        font-size: 4em;
+    }
+
+    .donation-sum {
+        font-size: 6em;
+        color: @color-3;
+
+        span {
+            color: @color-3;
+        }
+    }
+}
+
+.sponsoring {
+    position: fixed;
+    width: 43%;
+    bottom: 20px;
+    right: 0;
+    display: flex;
+    justify-content: space-evenly;
+
+    img {
+        height: 130px;
+        display: inline-block;
+    }
+}
+
+.till-start-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: @color-2;
+    z-index: 10;
+
+    .clock {
+        width: 1000px;
+        height: 1000px;
+        margin-top: 100px;
+    }
+
+    h3 {
+        font-size: 7em;
+        margin-top: 280px;
+    }
+
+    .till-start {
+        font-size: 14em;
+    }
+}

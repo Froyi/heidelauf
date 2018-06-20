@@ -1,0 +1,49 @@
+{% include ('module/notification.twig') %}
+
+<div class="admin-page">
+    <img src="{{ templateDir }}/img/logo.jpg" class="logo">
+
+    <h1>Team Verwaltung</h1>
+
+    <div class="flex">
+        <div class="insert-team">
+            <h2>Neues Team eintragen</h2>
+            <form action="{{ route('insertTeam') }}" method="post">
+                <p><label for="teamName">TeamName: <br><input type="text" autofocus name="teamName"></label></p>
+                <p><label for="transponderNumber">Transponder Nummer: <br><input type="number"
+                                                                             name="transponderNumber"></label>
+                </p>
+                <p><label for="extreme"><input type="checkbox" name="extreme"> Ist Extrem Team</label></p>
+                <p><input type="submit" name="submit" value="Anlegen"></p>
+            </form>
+        </div>
+
+        <div class="actual-teams">
+            <div class="js-edit-team-container edit-team-container invisible"></div>
+
+            {% if teams %}
+                <h2>Aktuelle Teams</h2>
+
+                {% for team in teams %}
+                    {% set teamId = {'teamId': team.getTeamId} %}
+                    <div class="team-edit-list-team">
+                        <div class="counter">
+                            {{ loop.index0 + 1 }}
+                        </div>
+                        <div class="information">
+                            <p><b>Name:</b> <br>
+                                {{ team.getTeamName }}</p>
+                            <p><b>Transponder:</b> <br>
+                                {{ team.getTransponderNumber }}</p>
+                            <p><b>Kategorie:</b> <br>{% if team.isExtreme is same as (true) %}Extrem{% else %}Jedermann{% endif %}</p>
+                        </div>
+                        <div>
+                            <button class="js-edit-team" data-team-id="{{ team.getTeamId }}">Bearbeiten</button>
+                            <a href="{{ route('deleteTeam', teamId) }}" class="js-delete-team">Löschen</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
