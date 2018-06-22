@@ -6,6 +6,7 @@ use Project\Configuration;
 use Project\Module\Database\Database;
 use Project\Module\GenericValueObject\Datetime;
 use Project\Module\GenericValueObject\DatetimeInterface;
+use Project\Utilities\Tools;
 
 
 /**
@@ -42,6 +43,10 @@ class ReaderService
         $runArray = [];
         $runFactory = new RunFactory();
         $file = file(self::INPUT_FILE_NAME);
+
+        if ($this->hasChanged() === false) {
+            return $runArray;
+        }
         $count = \count($file);
         /** @var DatetimeInterface $endTime */
         $endTime = Datetime::fromValue($configuration->getEntryByName('endTime'));
@@ -58,6 +63,18 @@ class ReaderService
         }
 
         return $runArray;
+    }
+
+    public function hasChanged(): bool
+    {
+        $filesize = filesize(self::INPUT_FILE_NAME);
+
+        if ($filesize !== $_SESSION['lastFilesize']) {
+            $_SESSION['lastFilesize'] = $filesize;
+            return true;
+        }
+
+        return false;
     }
 
     public function saveRuns(array $runs): bool

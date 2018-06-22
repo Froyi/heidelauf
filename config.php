@@ -21,7 +21,7 @@ return [
         'namespace' => 'Controller'
     ],
     'donationPerRound' => 1,
-    'startingTime' => '2018-06-20 13:19:00',
-    'endTime' => '2018-06-20 13:23:00',
+    'startingTime' => '2018-06-21 13:19:00',
+    'endTime' => '2018-06-22 13:23:00',
     'transponderFile' => 'transponder.txt'
 ];

@@ -23,7 +23,7 @@ function refresh() {
 
 $(document).ready(function () {
     window.setTimeout(hideNotifications, 5000); // 5 seconds
-    window.setTimeout(window.setInterval(refresh, 2000), 5000); // 3 seconds
+    window.setTimeout(window.setInterval(refresh, 3000), 5000); // 3 seconds
 
     const countdown = new Countdown({
         selector: '.js-countdown',

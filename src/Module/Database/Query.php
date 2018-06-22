@@ -156,6 +156,10 @@ class Query
             $value = '\'' . $value . '\'';
         }
 
+        if ($value === false) {
+            $value = 'false';
+        }
+
         if (!empty($this->set)) {
             $this->set .= ', ';
         }
